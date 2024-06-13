@@ -1,14 +1,14 @@
 <template>
   <div
-    :theme="theme"
-    class="code-editor"
-    :class="{
+      :theme="theme"
+      class="code-editor"
+      :class="{
       'hide-header': !header,
       scroll: scroll,
       'read-only': readOnly,
       wrap: wrap,
     }"
-    :style="{
+      :style="{
       width: width,
       height: height,
       zIndex: zIndex,
@@ -20,17 +20,17 @@
   >
     <div class="hljs" :style="{ borderRadius: borderRadius }">
       <div
-        class="header"
-        :class="{ border: showLineNums }"
-        v-if="header"
-        :style="{ borderRadius: borderRadius + ' ' + borderRadius + ' 0 0' }"
+          class="header"
+          :class="{ border: showLineNums }"
+          v-if="header"
+          :style="{ borderRadius: borderRadius + ' ' + borderRadius + ' 0 0' }"
       >
         <Dropdown
-          v-if="displayLanguage"
-          :width="langListWidth"
-          :title="languageTitle"
-          :disabled="languages.length <= 1"
-          :defaultDisplay="langListDisplay"
+            v-if="displayLanguage"
+            :width="langListWidth"
+            :title="languageTitle"
+            :disabled="languages.length <= 1"
+            :defaultDisplay="langListDisplay"
         >
           <ul class="lang-list hljs" :style="{ height: langListHeight }">
             <li v-for="(lang, index) in languages" :key="index" @click="changeLang(lang)">
@@ -41,14 +41,14 @@
         <CopyCode @click="copy" v-if="copyCode"></CopyCode>
       </div>
       <div
-        class="code-area"
-        :style="{ borderRadius: header ? '0 0 ' + borderRadius + ' ' + borderRadius : borderRadius }"
+          class="code-area"
+          :style="{ borderRadius: header ? '0 0 ' + borderRadius + ' ' + borderRadius : borderRadius }"
       >
         <div
-          v-if="showLineNums"
-          ref="lineNums"
-          class="line-nums hljs"
-          :style="{
+            v-if="showLineNums"
+            ref="lineNums"
+            class="line-nums hljs"
+            :style="{
             fontSize: fontSize,
             paddingTop: header ? '10px' : padding,
             paddingBottom: padding,
@@ -60,24 +60,24 @@
           <div>&nbsp;</div>
         </div>
         <textarea
-          title="textarea"
-          :readOnly="readOnly"
-          :style="{
+            title="textarea"
+            :readOnly="readOnly"
+            :style="{
             fontSize: fontSize,
             padding: !header ? padding : lineNums ? '10px ' + padding + ' ' + padding : '0 ' + padding + ' ' + padding,
             marginLeft: showLineNums ? lineNumsWidth + 'px' : '0',
             width: showLineNums ? 'calc(100% - ' + lineNumsWidth + 'px)' : '100%',
           }"
-          ref="textarea"
-          :autofocus="autofocus"
-          spellcheck="false"
-          @keydown.tab.prevent.stop="tab"
-          @scroll="calcScrollDistance"
-          :value="modelValue == undefined ? content : modelValue"
-          @input="updateValue"
+            ref="textarea"
+            :autofocus="autofocus"
+            spellcheck="false"
+            @keydown.tab.prevent.stop="tab"
+            @scroll="calcScrollDistance"
+            :value="modelValue == undefined ? content : modelValue"
+            @input="updateValue"
         ></textarea>
         <pre
-          :style="{
+            :style="{
             paddingRight: scrollBarWidth + 'px',
             paddingBottom: scrollBarHeight + 'px',
             marginLeft: showLineNums ? lineNumsWidth + 'px' : '0',
@@ -85,10 +85,10 @@
           }"
         >
         <code
-          ref="code"
-          v-highlight="contentValue"
-          :class="languageClass"
-          :style="{
+            ref="code"
+            v-highlight="contentValue"
+            :class="languageClass"
+            :style="{
             top: top + 'px',
             left: left + 'px',
             fontSize: fontSize,
@@ -216,6 +216,7 @@ export default {
     highlight: {
       mounted(el, binding) {
         el.textContent = binding.value;
+        el.removeAttribute('data-highlighted');
         hljs.highlightElement(el);
       },
       updated(el, binding) {
@@ -223,6 +224,7 @@ export default {
           el.scrolling = false;
         } else {
           el.textContent = binding.value;
+          el.removeAttribute('data-highlighted');
           hljs.highlightElement(el);
         }
       },
@@ -280,7 +282,7 @@ export default {
       } else {
         const cursorPosition = this.$refs.textarea.selectionStart;
         this.content =
-          this.content.substring(0, cursorPosition) + this.tabWidth + this.content.substring(cursorPosition);
+            this.content.substring(0, cursorPosition) + this.tabWidth + this.content.substring(cursorPosition);
         this.cursorPosition = cursorPosition + this.tabWidth.length;
         this.insertTab = true;
       }
