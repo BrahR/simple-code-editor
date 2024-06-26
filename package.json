@@ -28,6 +28,6 @@
   },
   "homepage": "https://simple-code-editor.vicuxd.com",
   "dependencies": {
-    "highlight.js": "^11.8.0"
+    "highlight.js": "^11.9.0"
   }
 }
