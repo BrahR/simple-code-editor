@@ -102,7 +102,7 @@
 </template>
 
 <script>
-import hljs from "highlight.js";
+// import hljs from "highlight.js";
 import Dropdown from "./Dropdown.vue";
 import CopyCode from "./CopyCode.vue";
 import "./themes/themes-base16.css";
@@ -217,7 +217,7 @@ export default {
       mounted(el, binding) {
         el.textContent = binding.value;
         el.removeAttribute('data-highlighted');
-        hljs.highlightElement(el);
+        // hljs.highlightElement(el);
       },
       updated(el, binding) {
         if (el.scrolling) {
@@ -225,7 +225,7 @@ export default {
         } else {
           el.textContent = binding.value;
           el.removeAttribute('data-highlighted');
-          hljs.highlightElement(el);
+          // hljs.highlightElement(el);
         }
       },
     },
